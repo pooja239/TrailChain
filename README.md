@@ -19,4 +19,4 @@ Folder Structure
   - TrailChain: Deploys a set of NotarySc and TrackerSc
   - Payment: Deploys PaymentSc
   
-- caliper_benchmark: contains all the config files to run tests on the SUT in Layer-2 eqipped with TrackerSc and NotarySc for benchmarking purpose.
+- caliper_benchmark: contains all the config files to run tests on the SUT in Layer-2. It is equipped with TrackerSc and NotarySc for benchmarking purpose.
