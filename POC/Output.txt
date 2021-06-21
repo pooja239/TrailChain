@@ -1,0 +1,254 @@
+Pooja:Project2 pooja$ python3 POC_2.py
+
+********************************************************************
+Initialization: Deploy System, payment and marketplace contracts
+********************************************************************
+TrackerSc Contract deployed at address: 0x464CD830D689F24d0F817898b3797f6f53495219
+NotarySc Contract deployed at address: 0x29349B747c7c49c79b8a4BEA5cf0Aa150a14085E
+Tracker address is updated in NotarySc
+PaymentSc Contract deployed at address: 0xaF9FB36265b842591aC41543E4561855081d3F12
+RegisterSc Contract deployed at address: 0xaF9FB36265b842591aC41543E4561855081d3F12
+RegisterSc Contract deployed at address: 0xaF9FB36265b842591aC41543E4561855081d3F12
+
+********************************************************************
+Create digital notary, data-producer and data-buyer instances for Marketplace1
+********************************************************************
+
+********************************************************************
+Registration and Setup: Register Actors, devices
+********************************************************************
+Digital notary is registered
+[digitalNotary1]: Digital notary register marketplace in TrailChain
+Digital notary is registered
+[digitalNotary2]: Digital notary register marketplace in TrailChain
+Actor1 is registered in Marketplace
+Actor1 is registered in Payment system
+Actor1 device is registered in Marketplace
+Actor2 is registered in Marketplace
+Actor2 is registered in Marketplace
+Actor2 is registered in Payment system
+Actor3 is registered in Marketplace
+Actor3 is registered in Payment system
+Actor4 is registered in Marketplace
+Actor4 is registered in Payment system
+
+*********************************   SELLING Scenario     ***********************************
+
+********************************************************************
+Step 1: Deploy SubscriptionSc
+********************************************************************
+-> [Actor1]: Data-Seller deploys SubscriptionSc address: 0xf7D86fe463B437683f14d22E1c3B1E6d2250A1d1
+
+********************************************************************
+Step 2: Register SubscriptionSc
+********************************************************************
+Step 2.1: Agreement registered by Seller
+-> [Actor1]: registers contract in the marketplace
+Step 2.2: Agreement registered by Buyer
+-> [Actor2]: registers contract in the marketplace
+>> Agreement ID is: 0x6d0a4e70de088c43f83cff8c40630c6cc979c70544b648cfcf1aa97af7a3ef1c
+
+********************************************************************
+Step 3: Add subscription by producer: device1, GPS, realtime, 1000, 10
+********************************************************************
+[Actor1]: Data-Seller add subscription with ID: 0x8f56b35078f03eaea300bbe01eead3894fef968fc7defa39ae8888810835fa91
+-> Subscription status : INITIATE
+-> Payment status : AWAITING_PAYMENT
+
+********************************************************************
+Step 4: Register new generated Dataset
+********************************************************************
+(4.1) [Actor1]: Data-Producer executes  data registeration with DID: 0x8f56b35078f03eaea300bbe01eead3894fef968fc7defa39ae8888810835fa91
+(4.2) [digitalNotary1]: Digital-Notary created a New Trade trail with ID: 0xf2736e8c9daaf1f838ed88863f44d41019f3e063ca4c33c0c47110a33b11f7d8
+(4.3) [digitalNotary1]: created Nonce and updated in the RegisterSc
+(4.4) [digitalNotary1]: encrypts (TID, Nonce, Challenge) and send to the data-producer
+accept
+(4.5) [Actor1]: Data-Producer validates the ownership of dataset using received nonce
+-> Data Registration passed
+(4.6) [Actor1]: Data-Producer watermarks the data with the received key
+
+********************************************************************
+Step 5: Data-Buyer starts the subscription
+********************************************************************
+[Actor2]: Starts the subscription
+-> Subscription status : ACTIVE
+-> Payment status : AWAITING_DELIVERY
+
+********************************************************************
+Step 6: Seller transfer data to Buyer
+********************************************************************
+(6.1) [Actor1]: Data-seller transfers the dataset to data-buyer
+(6.2) [Actor2]: Data-buyer receives the dataset from data-seller
+
+********************************************************************
+Step 7: Buyer executes data verification process
+********************************************************************
+(7.1) Data-Buyer: Send (SID, AID, verification packets) to the Notary for executing data verification process
+(7.2) [digitalNotary1]: Receives the verification requests from data-buyer
+(7.3) [digitalNotary1]: Extracts the watermarking from the verification packets
+>> Extracted watermarking: 0xf2736e8c9daaf1f838ed88863f44d41019f3e063ca4c33c0c47110a33b11f7d8
+(7.3) [digitalNotary1]: Validating the trail
+-> Validation result: No reselling
+(7.5) [digitalNotary1]: Updates the proof of authencity for data-buyer
+-> Subscription status : SETTLEMENT
+-> Payment status : AWAITING_SETTLEMENT
+
+********************************************************************
+Step 8: Payment-Settlement
+********************************************************************
+(8.2) digitalNotary1: Executes evaluatePaymentShare using NotarySc
+-> Payment share list : (['0x81d79ea0a9cc5064137a4cde687c193b22324887330cd4e1c71b14a8fc102d51'], [1000])
+(8.3) digitalNotary1: Executes paymentShare using PaymentSc
+(8.4) digitalNotary1: Executes registerPayment that marks the completion of payment settlement and subscription
+-> Subscription status : FINISH
+-> Payment status : COMPLETE
+
+********************************************************************
+RESULT of SELLING
+********************************************************************
+->Buyer: Actor2 Account Balance: 9000
+->Owner: Actor1 Account Balance: 11000
+
+*********************************   INTRA-RESELLING Scenario     ***********************************
+
+********************************************************************
+Step 1: Deploy SubscriptionSc
+********************************************************************
+-> [Actor2]: Data-Seller deploys SubscriptionSc address: 0x7367f66d03726454F80C04739A185B38Fc1Fb263
+
+********************************************************************
+Step 2: Register SubscriptionSc
+********************************************************************
+Step 2.1: Agreement registered by Seller
+-> [Actor2]: registers contract in the marketplace
+Step 2.2: Agreement registered by Buyer
+-> [Actor3]: registers contract in the marketplace
+>> Agreement ID is: 0xf6040c848dfea24710b023785d7c982a6809565b103898ec9d7e48367852e65b
+
+********************************************************************
+Step 3: Add subscription by producer: device1, GPS, realtime, 1000, 10
+********************************************************************
+[Actor2]: Data-Seller add subscription with ID: 0xab3734f4d7be7af0fa67810da9969d962b3cb837a603fcd664e4358c175acdf0
+-> Subscription status : INITIATE
+-> Payment status : AWAITING_PAYMENT
+
+********************************************************************
+Step 5: Data-Buyer and data-seller starts the subscription
+********************************************************************
+[Actor2]: Starts the subscription
+-> Subscription status : INITIATE
+-> Payment status : AWAITING_PAYMENT
+[Actor3]: Starts the subscription
+-> Subscription status : ACTIVE
+-> Payment status : AWAITING_DELIVERY
+
+********************************************************************
+Step 6: Seller transfer data to Buyer
+********************************************************************
+(6.1) [Actor2]: Data-seller transfers the dataset to data-buyer
+(6.2) [Actor3]: Data-buyer receives the dataset from data-seller
+
+********************************************************************
+Step 7: Buyer executes data verification process
+********************************************************************
+(7.1) Data-Buyer: Send (SID, AID, verification packets) to the Notary for executing data verification process
+(7.2) [digitalNotary1]: Receives the verification requests from data-buyer
+(7.3) [digitalNotary1]: Extracts the watermarking from the verification packets
+>> Extracted watermarking: 0xf2736e8c9daaf1f838ed88863f44d41019f3e063ca4c33c0c47110a33b11f7d8
+(7.3) [digitalNotary1]: Validating the trail
+-> Validation result: intra reselling
+(7.5) [digitalNotary1]: Updates the proof of authencity for data-buyer
+-> Subscription status : SETTLEMENT
+-> Payment status : AWAITING_SETTLEMENT
+
+********************************************************************
+Step 8: Payment-Settlement
+********************************************************************
+(8.2) digitalNotary1: Executes evaluatePaymentShare using NotarySc
+-> Payment share list : (['0x37a85e7f531c3e199c458bdf9685b940860196ba10c3811e402509cd2d0a4dcc', '0x81d79ea0a9cc5064137a4cde687c193b22324887330cd4e1c71b14a8fc102d51'], [900, 100])
+(8.3) digitalNotary1: Executes paymentShare using PaymentSc
+(8.4) digitalNotary1: Executes registerPayment that marks the completion of payment settlement and subscription
+-> Subscription status : FINISH
+-> Payment status : COMPLETE
+
+********************************************************************
+RESULT
+********************************************************************
+->Buyer: Actor3 Account Balance: 9000
+->Owner: Actor2 Account Balance: 9900
+->Owner: Actor1 Account Balance: 11100
+
+*********************************   INTER-RESELLING Scenario     ***********************************
+
+********************************************************************
+Step 1: Deploy SubscriptionSc
+********************************************************************
+-> [Actor2]: Data-Seller deploys SubscriptionSc address: 0xA4dE798D071c08F8E46BcBb359171ed0cC7569d5
+
+********************************************************************
+Step 2: Register SubscriptionSc
+********************************************************************
+Step 2.1: Agreement registered by Seller
+-> [Actor2]: registers contract in the marketplace
+Step 2.2: Agreement registered by Buyer
+-> [Actor4]: registers contract in the marketplace
+>> Agreement ID is: 0xab407ed797909c39e2c9f93b829405894ebf0e295a4a67db06251d864985854c
+
+********************************************************************
+Step 3: Add subscription by producer: device1, GPS, realtime, 1000, 10
+********************************************************************
+[Actor2]: Data-Seller add subscription with ID: 0x18dc399dcb601131bebfbefc79f907ab73b8d1c87d94295ea07211be372f6b79
+-> Subscription status : INITIATE
+-> Payment status : AWAITING_PAYMENT
+
+********************************************************************
+Step 5: Data-Buyer and data-seller starts the subscription
+********************************************************************
+[Actor2]: Starts the subscription
+-> Subscription status : INITIATE
+-> Payment status : AWAITING_PAYMENT
+[Actor4]: Starts the subscription
+-> Subscription status : ACTIVE
+-> Payment status : AWAITING_DELIVERY
+
+********************************************************************
+Step 6: Seller transfer data to Buyer
+********************************************************************
+(6.1) [Actor2]: Data-seller transfers the dataset to data-buyer
+(6.2) [Actor4]: Data-buyer receives the dataset from data-seller
+
+********************************************************************
+Step 7: Buyer executes data verification process
+********************************************************************
+(7.1) Data-Buyer: Send (SID, AID, verification packets) to the Notary for executing data verification process
+(7.2) [digitalNotary2]: Receives the verification requests from data-buyer
+(7.3) [digitalNotary2]: Extracts the watermarking from the verification packets
+>> Extracted watermarking: 0xf2736e8c9daaf1f838ed88863f44d41019f3e063ca4c33c0c47110a33b11f7d8
+(7.3) [digitalNotary2]: Validating the trail
+-> Validation result: inter reselling
+(7.5) [digitalNotary2]: Updates the proof of authencity for data-buyer
+-> Subscription status : SETTLEMENT
+-> Payment status : AWAITING_SETTLEMENT
+
+********************************************************************
+Step 8: Payment-Settlement
+********************************************************************
+(8.2) digitalNotary2: Executes evaluatePaymentShare using NotarySc
+-> Payment share list : (['0x37a85e7f531c3e199c458bdf9685b940860196ba10c3811e402509cd2d0a4dcc', '0x81d79ea0a9cc5064137a4cde687c193b22324887330cd4e1c71b14a8fc102d51'], [900, 100])
+(8.3) digitalNotary2: Executes paymentShare using PaymentSc
+(8.4) digitalNotary2: Executes registerPayment that marks the completion of payment settlement and subscription
+-> Subscription status : FINISH
+-> Payment status : COMPLETE
+
+********************************************************************
+RESULT
+********************************************************************
+->Buyer: Actor4 Account Balance: 9000
+->Owner: Actor2 Account Balance: 10800
+->Owner: Actor1 Account Balance: 11200
+selling: 13 start time: 1620784579 end time: 1620784592
+Intra-selling: 10 start time: 1620784592 end time: 1620784602
+Inter-selling: 9 start time: 1620784602 end time: 1620784611
+Pooja:Project2 pooja$ 
+Pooja:Project2 pooja$ 
+Pooja:Project2 pooja$ 

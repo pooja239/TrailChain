@@ -1,0 +1,120 @@
+
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config2.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config3.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config4.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config5.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config6.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config7.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config8.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config9.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/TrackerSc/config10.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config1.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config2.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config3.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config4.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config5.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config6.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config7.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config8.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config9.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+npx caliper launch manager     --caliper-workspace .     --caliper-benchconfig benchmarks/scenario/NotarySc/config10.yaml     --caliper-networkconfig networks/ethereum/1node-clique/networkconfig.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

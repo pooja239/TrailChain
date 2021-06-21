@@ -1,0 +1,77 @@
+simpleArgs: &simple-args
+  Marketplace: "Marketplace5"
+  ratio: 10
+  paymentAmount: 1000000000
+  numberOfTrails: &number-of-trails 300
+  createTrails: &create-trails 301
+  trackerScAddress: '0xe22b83e326574542Fa797C76c7104f483aC9e741'
+
+test:
+    name: NotarySc
+    description: >-
+      This is an example benchmark for Caliper, to test the backend DLT's
+      performance with simple account opening & querying transactions.
+    workers:
+      type: local
+      number: 1
+    rounds:
+      - label: registerTrackerAddress
+        description: Test description for adding the TrackerSc address in the NotarySc.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initTSc.js
+          arguments: *simple-args
+      - label: registerDigitalNotary
+        description: Test description for registering the digital Notary node in the TrailChain network.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initDN.js
+          arguments: *simple-args
+      - label: registerMarketplace
+        description: Test description registering the associated marketplace in the TrailChain network.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initMP.js
+          arguments: *simple-args
+      - label: addnewTrail
+        description: Test description for adding a new trail in the TrailChain network.
+        txNumber: *create-trails
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 50
+        workload:
+          module: benchmarks/scenario/NotarySc/addnewTrail.js
+          arguments: *simple-args
+      - label: paymentMultiShare
+        description: Test description for evaluating the payment share for trading multiple dataset.
+        txNumber: *number-of-trails
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 50
+        workload:
+          module: benchmarks/scenario/NotarySc/paymentMultiShare.js
+          arguments: *simple-args
+      - label: paymentSingleShare
+        description: Test description for evaluating the payment share for trading same dataset.
+        txNumber: *number-of-trails
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 50
+        workload:
+          module: benchmarks/scenario/NotarySc/paymentSingleShare.js
+          arguments: *simple-args

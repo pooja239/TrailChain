@@ -1,0 +1,116 @@
+simpleArgs: &simple-args
+  Marketplace: "Marketplace1"
+  ratio: 1
+  numberOfTrails: &number-of-trails 1000
+  createTrails: &create-trails 1
+
+
+test:
+  name: TrackerSc
+  description: >-
+    This is an example benchmark for Caliper, to test the backend DLT's
+    performance with simple account opening & querying transactions.
+  workers:
+    type: local
+    number: 1
+  rounds:
+    - label: createT3
+      description: Test description for the opening of an account through the deployed contract.
+      txNumber: *create-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 20
+      workload:
+        module: benchmarks/scenario/TrackerSc/create.js
+        arguments: *simple-args
+    - label: updateSingleT3
+      description: Test description for the query performance of the deployed contract.
+      txNumber: *number-of-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 20
+      workload:
+        module: benchmarks/scenario/TrackerSc/updateSingle.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail51
+      description: Test description for the query performance of the deployed contract.
+      txNumber: 2500
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 50
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail52
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 100
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail61
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 90
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail71
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 80
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail81
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail91
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 90
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail101
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 100
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail150
+      description: Test description for the query performance of the deployed contract.
+      txDuration: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 150
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args

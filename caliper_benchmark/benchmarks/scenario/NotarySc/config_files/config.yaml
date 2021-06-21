@@ -1,0 +1,16 @@
+simpleArgs: &simple-args
+  Marketplace: "Marketplace1"
+  ratio: 1
+  numberOfTrails: &number-of-trails 1
+  createTrails: &create-trails 1
+
+
+test:
+  name: TrackerSc
+  description: >-
+    This is an example benchmark for Caliper, to test the backend DLT's
+    performance with simple account opening & querying transactions.
+  workers:
+    type: local
+    number: 1
+  rounds:

@@ -1,0 +1,39 @@
+{
+    "caliper": {
+        "blockchain": "ethereum",
+        "command" : {
+            "start": "docker-compose -f ./networks/ethereum/1node-clique/docker-compose.yml up -d"
+          }
+    },
+    "ethereum": {
+        "url": "ws://localhost:8546",
+        "contractDeployerAddress": "0xc0A8e4D217eB85b812aeb1226fAb6F588943C2C2",
+        "contractDeployerAddressPassword": "password",
+        "fromAddress": "0xc0A8e4D217eB85b812aeb1226fAb6F588943C2C2",
+        "fromAddressPassword": "password",
+        "transactionConfirmationBlocks": 2,
+        "contracts": {
+            "TrackerSc": {
+                "path": "./src/ethereum/TrackerSc/TrackerSc.json",
+                "estimateGas": true,
+                "gas": {
+                    "createT3": 3000000,
+                    "updateT3": 3000000,
+                    "retrieveTrail": 25000000
+                }
+            },
+            "NotarySc": {
+                "path": "./src/ethereum/NotarySc/NotarySc.json",
+                "estimateGas": true,
+                "gas": {
+                    "setAddresTracker": 3000000,
+                    "registerDigitalNotary": 3000000,
+                    "registerMarketplace": 3000000,
+                    "validateTrail": 25000000,
+                    "addNewDataTrail": 3000000,
+                    "evaluatePaymentShare": 3000000
+                }
+            }
+        }
+    }
+}

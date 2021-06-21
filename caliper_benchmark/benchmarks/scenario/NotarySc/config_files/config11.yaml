@@ -1,0 +1,267 @@
+simpleArgs: &simple-args
+  Marketplace: "Marketplace1"
+  ratio: 10
+  paymentAmount: 1000000000
+  numberOfTrails: &number-of-trails 1000
+  createTrails: &create-trails 1001
+  trackerScAddress: '0xe22b83e326574542Fa797C76c7104f483aC9e741'
+
+test:
+    name: NotarySc
+    description: >-
+      This is an example benchmark for Caliper, to test the backend DLT's
+      performance with simple account opening & querying transactions.
+    workers:
+      type: local
+      number: 1
+    rounds:
+      - label: registerTrackerAddress
+        description: Test description for adding the TrackerSc address in the NotarySc.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initTSc.js
+          arguments: *simple-args
+      - label: registerDigitalNotary
+        description: Test description for registering the digital Notary node in the TrailChain network.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initDN.js
+          arguments: *simple-args
+      - label: registerMarketplace
+        description: Test description registering the associated marketplace in the TrailChain network.
+        txNumber: 1
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 1
+        workload:
+          module: benchmarks/scenario/NotarySc/initMP.js
+          arguments: *simple-args
+      - label: validateMultiTrail110
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 110
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail110
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 110
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail00
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 100
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail00
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 100
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail90
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 90
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail90
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 90
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail80
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 80
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail80
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 80
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail70
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 70
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail70
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 70
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail60
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 60
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail60
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 60
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail50
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 50
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail50
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 50
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail40
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 40
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail40
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 40
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail30
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 30
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail30
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 30
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail20
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 20
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail20
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 20
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args
+      - label: validateMultiTrail10
+        description: Test description for validating the trail for multiple dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 10
+        workload:
+          module: benchmarks/scenario/NotarySc/validateMulti.js
+          arguments: *simple-args
+      - label: validateSingleTrail10
+        description: Test description for validating the trail for single dataset.
+        txDuration: 50
+        rateControl:
+          type: fixed-rate
+          opts:
+            tps: 10
+        workload:
+          module: benchmarks/scenario/NotarySc/validateSingle.js
+          arguments: *simple-args

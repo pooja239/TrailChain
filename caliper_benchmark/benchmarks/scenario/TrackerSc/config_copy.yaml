@@ -1,0 +1,66 @@
+simpleArgs: &simple-args
+  Marketplace: "Marketplace1"
+  ratio: 1
+  numberOfTrails: &number-of-trails 1000
+  createTrails: &create-trails 1001
+
+
+test:
+  name: TrackerSc
+  description: >-
+    This is an example benchmark for Caliper, to test the backend DLT's
+    performance with simple account opening & querying transactions.
+  workers:
+    type: local
+    number: 1
+  rounds:
+    - label: createT3
+      description: Test description for the opening of an account through the deployed contract.
+      txNumber: *create-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/create.js
+        arguments: *simple-args
+    - label: updateMultipleT3
+      description: Test description for the query performance of the deployed contract.
+      txNumber: *number-of-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/updateMulti.js
+        arguments: *simple-args
+    - label: updateSingleT3
+      description: Test description for the query performance of the deployed contract.
+      txNumber: *number-of-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/updateSingle.js
+        arguments: *simple-args
+    - label: retrieveSingleTrail
+      description: Test description for the query performance of the deployed contract.
+      txNumber: *number-of-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveSingleTrail.js
+        arguments: *simple-args
+    - label: retrieveMultiTrail
+      description: Test description for the query performance of the deployed contract.
+      txNumber: *number-of-trails
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 70
+      workload:
+        module: benchmarks/scenario/TrackerSc/retrieveMultiTrail.js
+        arguments: *simple-args

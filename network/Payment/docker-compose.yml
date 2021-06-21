@@ -1,0 +1,77 @@
+version: "3"
+services:
+  bootnode:
+    environment:
+      - nodekeyhex=08f0e1dee5c1b4645f3331a566009e41a4514b6cd28656d63d0449ecf812812b #Needs to be fix, so that the miners know the resulting enode id
+    build:
+      context: ./bootnode
+    ports:
+      - 50301:30301/udp
+    networks:
+      chainnet2:
+        ipv4_address: 192.25.0.101 # The miners need to know the IP address later on
+
+  miner:
+    depends_on:
+      - bootnode
+    environment:
+      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
+      - bootnodeIp=192.25.0.101
+    build:
+      context: ./miner
+      args:
+        password: pass
+        privatekey: 1fe406082a24987d4c63cc9609ad31ac14cc691ec64c9bfb9643ef06c811687b # this is not recommended for real production case
+    networks:
+      chainnet2:
+        ipv4_address: 192.25.0.102
+    ports:
+      - 5545:8545
+
+  service-provider:
+    depends_on:
+      - miner
+    environment:
+      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
+      - bootnodeIp=192.25.0.101
+    build:
+      context: ./node
+      args:
+        password: word
+        privatekey: 3f88f6416e31a8ef981ca6eebbf3c210258cb30d47c58e5ecf7022b8fbc12bf2 # this is not recommended for real production case
+    command: ./sp-start.sh 76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c 192.25.0.101
+    networks:
+      - chainnet2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+    ports:
+    - 5546:8545
+
+  service-consumer:
+    depends_on:
+      - service-provider
+    environment:
+      - bootnodeId=76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c #derived from the nodekeyhex of the bootnode
+      - bootnodeIp=192.25.0.101
+    build:
+      context: ./node
+      args:
+        password: word
+        privatekey: a111204b047cbb07d211ac0e6f7ba5d9d3b6a0bf6859728a52591841b4bcb8f0 # this is not recommended for real production case
+    networks:
+      - chainnet2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+    ports:
+    - 5547:8545
+
+networks:
+  chainnet2:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 192.25.0.0/24
