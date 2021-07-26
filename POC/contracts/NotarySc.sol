@@ -89,7 +89,6 @@ contract NotarySc {
     function checkType(bytes32 market, bytes32[] memory mList) public pure returns(string memory result){
         for(uint i=0; i<mList.length; i++){
             if(market == mList[i]){
-                market = mList[i];
                 result = "intra reselling";
             } 
             else {
