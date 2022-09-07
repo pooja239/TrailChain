@@ -11,7 +11,7 @@ Folder Structure
   - data.txt: contains GPS data samples to be send from seller to buyer
   - output.txt: It is the sample log for demonstrating various steps involved in selling, intra-reselling and inter-reselling
 
-- Basline: Contains the implementation of baseline
+- Baseline: Contains the implementation of baseline
 
 - Network: A private ethereum network consists of 2 nodes+ 1 miner + 1 bootnode
   - Marketplace1: Deploys a set of registerSc and SubscriptionSc
